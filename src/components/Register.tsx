@@ -4,8 +4,7 @@ interface RegisterProps {
   handleRegister: (username: string, password: string) => void;
 }
 
-
-const Register: React.FC<RegisterProps> = ({ handleRegister  }) => {
+const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
 
   const [data, setData] = useState({
     username: '',
@@ -17,7 +16,7 @@ const Register: React.FC<RegisterProps> = ({ handleRegister  }) => {
     setData((oldData) => ({ ...oldData, [name]: value }));
   }
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement>= (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const { username, password } = data;
     handleRegister(username, password);

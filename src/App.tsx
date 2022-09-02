@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Header } from './components/Header';
 import { Register } from './components/Register';
 import { Main } from './components/Main';
 import { Login } from './components/Login';
-import { Navigate, Route, Routes, useNavigate} from 'react-router-dom';
-import { register, login, squeeze } from './utils/api';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { register, login, squeeze, getStatistics } from './utils/api';
 import { Link } from './types/Link';
 
 const App: React.FC = () => {
@@ -18,30 +18,34 @@ const App: React.FC = () => {
 
   const handleRegister = (username: string, password: string) => {
     register(username, password)
-    .then(data => {
-      if (data) {
-        history('/signin');
-      }
-    })
-    .catch(err => console.log(err))
+      .then(data => {
+        if (data) {
+          history('/signin');
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   const handleLogin = (username: string, password: string) => {
     login(username, password)
-    .then(data => {
-      console.log('Login', data);
-      setLoggedIn(true);
-      setToken(data.access_token);
-      history('/');
+      .then(data => {
+        console.log('Login', data);
+        setLoggedIn(true);
+        setToken(data.access_token);
+        history('/');
       })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 
-  const handleSqueeze = (link: string)=> {
+  const handleSqueeze = (link: string) => {
     squeeze(link, token)
-    .then(data => setListLInks([...listLinks, data]));
+      .then(data => setListLInks([...listLinks, data]));
   }
-  console.log(listLinks);
+
+  useEffect(() => {
+    getStatistics(token)
+      .then(data => setListLInks(data))
+  }, [])
 
   return (
     <div className='app'>

@@ -1,0 +1,17 @@
+.link-list {
+  width: 100%;
+}
+
+.td-s {
+  max-width: 250px;
+  word-break: break-all;
+}
+
+.td-s:hover {
+  cursor: pointer;
+}
+
+.td-l {
+  max-width: 700px;
+  word-break: break-all;
+}
