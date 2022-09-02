@@ -1,4 +1,4 @@
-const BASE_URL = 'http://79.143.31.216';
+import {BASE_URL} from './constants';
 
 export const register = (username: string, password: string) => {
   return fetch(`${BASE_URL}/register?username=${username}&password=${password}`, {

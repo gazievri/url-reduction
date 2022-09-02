@@ -1,4 +1,5 @@
 import { Link } from '../types/Link';
+import { SHORT_URL } from '../utils/constants';
 
 interface Props {
   items: Link[],
@@ -20,7 +21,7 @@ const LinkList: React.FC<Props> = ({ items }) => {
       {
         items.map(item => {return (
           <tr key={item.id}>
-            <td>{`http://79.143.31.216/s/${item.short}`}</td>
+            <td onClick={() =>  navigator.clipboard.writeText(`${SHORT_URL}${item.short}`)}>{`${SHORT_URL}${item.short}`}</td>
             <td>{item.target}</td>
             <td>{item.counter}</td>
           </tr>
