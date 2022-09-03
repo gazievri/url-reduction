@@ -45,6 +45,17 @@ export const getStatistics = (token: string) => {
   }).then(checkResponse);
 };
 
+export const getStatisticsLimit = (token: string, query: string) => {
+  return fetch(`${BASE_URL}/statistics${query}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
 export function checkResponse(response: {
   ok: any;
   json: () => any;

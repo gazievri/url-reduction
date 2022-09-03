@@ -9,6 +9,7 @@
 
 .td-s:hover {
   cursor: pointer;
+  color: grey;
 }
 
 .td-l {
