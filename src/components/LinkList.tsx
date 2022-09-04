@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from '../types/Link';
 import { SHORT_URL } from '../utils/constants';
 
@@ -6,31 +6,48 @@ interface Props {
   items: Link[],
 }
 
+interface SetConfig {
+  key: string;
+  direction: string;
+}
+
 const LinkList: React.FC<Props> = ({ items }) => {
-  const [sortedField, setSortedField] = useState('');
+  const [sortedConfig, setSortedConfig] = useState<SetConfig | null>(null);
 
   let sortedProducts = [...items];
-  if (sortedField !== '') {
+
+  if (sortedConfig !== null) {
     sortedProducts.sort((a, b) => {
-      if (a[sortedField as keyof Link] > b[sortedField as keyof Link]) {
-        return -1;
+      if (a[sortedConfig.key as keyof Link] < b[sortedConfig.key as keyof Link]) {
+        return sortedConfig.direction === 'ascending' ? 1 : -1;
       }
-      if (a[sortedField as keyof Link] < b[sortedField as keyof Link]) {
-        return 1;
+      if (a[sortedConfig.key as keyof Link] > b[sortedConfig.key as keyof Link]) {
+        return sortedConfig.direction === 'ascending' ? -1 : 1;
       }
       return 0;
     });
   }
-  console.log(sortedProducts)
-  console.log(sortedField)
+
+  const requestSort = (key: string) => {
+    let direction = 'ascending';
+    setSortedConfig({ key, direction });
+    // @ts-ignore: Object is possibly 'null'.
+    if (sortedConfig.key === key && sortedConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortedConfig({ key, direction });
+  }
+
+
+
 
   return (
     <table className='striped'>
       <thead>
         <tr>
-          <th><button className='table-button' onClick={() => setSortedField('short')}>Short Link</button></th>
-          <th><button className='table-button' onClick={() => setSortedField('target')}>Long Link</button></th>
-          <th className='center'><button className='table-button' onClick={() => setSortedField('counter')}>Transition</button></th>
+          <th><button className='table-button' onClick={() => requestSort('short')}>Short Link</button></th>
+          <th><button className='table-button' onClick={() => requestSort('target')}>Long Link</button></th>
+          <th className='center'><button className='table-button' onClick={() => requestSort('counter')}>Transition</button></th>
         </tr>
       </thead>
       <tbody>
