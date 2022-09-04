@@ -7,7 +7,7 @@ import { Login } from './components/Login';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { register, login, squeeze, getStatistics, getStatisticsLimit } from './utils/api';
 import { Link } from './types/Link';
-import { EnumType } from 'typescript';
+import { PrivateRoutes } from './utils/PrivateRoutes';
 
 const App: React.FC = () => {
 
@@ -18,10 +18,12 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const limit: number = 10;
   const [query, setQuery] = useState(`?offset=0&limit=${limit}`);
-  const [isCounterSorted, setIsCounterSorted] = useState(false);
+  const [user, setUser] = useState('');
+
 
   const history = useNavigate();
 
+  // Регистрация нового пользователя
   const handleRegister = (username: string, password: string) => {
     register(username, password)
       .then(data => {
@@ -32,15 +34,23 @@ const App: React.FC = () => {
       .catch(err => console.log(err))
   }
 
+  // Функция авторизации
   const handleLogin = (username: string, password: string) => {
     login(username, password)
       .then(data => {
         console.log('Login', data);
         setLoggedIn(true);
+        setUser(username)
         setToken(data.access_token);
         history('/');
       })
       .catch(err => console.log(err))
+  }
+
+  const handleLogout = () => {
+    setToken('');
+    setLoggedIn(false);
+    history('/signin');
   }
 
   const handleSqueeze = (link: string) => {
@@ -74,27 +84,22 @@ const App: React.FC = () => {
       .catch(err => console.log(err));
   }, [query])
 
-  useEffect(() => {
-    console.log(listLinks)
-  }, [listLinks])
-
   return (
     <div className='app'>
-      <Header loggedIn={loggedIn} />
+      <Header loggedIn={loggedIn} user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path='/' element={
-          <Main
+        <Route element={<PrivateRoutes token={token} />}>
+          <Route element={<Main
             handleSqueeze={handleSqueeze}
             items={listLinks}
             pages={pages}
             handleChangePage={handleChangePage}
             currentPage={currentPage}
-          />
-        }/>
+          />} path='/' />
+        </Route>
         <Route path='/signup' element={<Register handleRegister={handleRegister} />} />
         <Route path='/signin' element={<Login handleLogin={handleLogin} />} />
-        <Route path='*' element={<Navigate to="/signup" />} />
-
+        <Route path='*' element={<Navigate to={loggedIn ? "/" : "/signin"} />} />
       </Routes>
     </div>
   );

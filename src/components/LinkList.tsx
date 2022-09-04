@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Link } from '../types/Link';
 import { SHORT_URL } from '../utils/constants';
 
@@ -16,6 +16,7 @@ const LinkList: React.FC<Props> = ({ items }) => {
 
   let sortedProducts = [...items];
 
+  // Функция сортировки списка по двум параматрам: содержимое списка и направлению сортировки
   if (sortedConfig !== null) {
     sortedProducts.sort((a, b) => {
       if (a[sortedConfig.key as keyof Link] < b[sortedConfig.key as keyof Link]) {
@@ -28,26 +29,34 @@ const LinkList: React.FC<Props> = ({ items }) => {
     });
   }
 
+  // Функция создания объекта sortedConfig с опциями для сортировки списка по двум параметрам
   const requestSort = (key: string) => {
     let direction = 'ascending';
     setSortedConfig({ key, direction });
-    // @ts-ignore: Object is possibly 'null'.
-    if (sortedConfig.key === key && sortedConfig.direction === 'ascending') {
-      direction = 'descending';
-    }
+
+    if (sortedConfig) {
+        if (sortedConfig.key === key && sortedConfig.direction === 'ascending') {
+        direction = 'descending';
+      };
+    };
+
     setSortedConfig({ key, direction });
   }
 
-
-
+  const getClassNamesFor = (name: string) => {
+    if (!sortedConfig) {
+      return;
+    }
+    return sortedConfig.key === name ? sortedConfig.direction : undefined;
+  };
 
   return (
     <table className='striped'>
       <thead>
         <tr>
-          <th><button className='table-button' onClick={() => requestSort('short')}>Short Link</button></th>
-          <th><button className='table-button' onClick={() => requestSort('target')}>Long Link</button></th>
-          <th className='center'><button className='table-button' onClick={() => requestSort('counter')}>Transition</button></th>
+          <th><button className={`table-button ${getClassNamesFor('short')}`} onClick={() => requestSort('short')}>Short Link</button></th>
+          <th><button className={`table-button ${getClassNamesFor('target')}`} onClick={() => requestSort('target')}>Long Link</button></th>
+          <th className='center'><button className={`table-button ${getClassNamesFor('counter')}`} onClick={() => requestSort('counter')}>Transition</button></th>
         </tr>
       </thead>
       <tbody>

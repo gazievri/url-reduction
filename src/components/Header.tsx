@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 
 interface HeaderProps {
-  loggedIn: boolean
+  loggedIn: boolean;
+  user: string;
+  handleLogout: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ loggedIn }) => {
+const Header: React.FC<HeaderProps> = ({ loggedIn, user, handleLogout }) => {
   return (
     <nav>
       <div className="nav-wrapper">
@@ -12,8 +14,8 @@ const Header: React.FC<HeaderProps> = ({ loggedIn }) => {
         <ul id="nav-mobile" className="right">
           {loggedIn ? (
             <>
-              <li><Link to="">Name</Link></li>
-              <li><Link to="">Sign out</Link></li>
+              <li><Link to="" >Name: {user}</Link></li>
+              <li><Link to="" onClick={() => handleLogout()}>Sign out</Link></li>
             </>
           )
             :

@@ -1,5 +1,6 @@
 .link-list {
   width: 100%;
+  flex-grow: 1;
 }
 
 .td-s {
@@ -32,7 +33,17 @@
   font-weight: bold;
 }
 
+.table-button:focus {
+  background-color: transparent;
+
+}
+
 .table-button:hover {
   cursor: pointer;
 }
+
+.descending {
+  color: red;
+}
+
 
