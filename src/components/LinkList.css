@@ -16,3 +16,23 @@
   max-width: 700px;
   word-break: break-all;
 }
+
+.sort-icon {
+  margin-right: 1rem;
+}
+
+.sort-icon:hover {
+  cursor: pointer;
+}
+
+.table-button {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  font-weight: bold;
+}
+
+.table-button:hover {
+  cursor: pointer;
+}
+

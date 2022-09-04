@@ -7,6 +7,7 @@ import { Login } from './components/Login';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { register, login, squeeze, getStatistics, getStatisticsLimit } from './utils/api';
 import { Link } from './types/Link';
+import { EnumType } from 'typescript';
 
 const App: React.FC = () => {
 
@@ -17,6 +18,7 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const limit: number = 10;
   const [query, setQuery] = useState(`?offset=0&limit=${limit}`);
+  const [isCounterSorted, setIsCounterSorted] = useState(false);
 
   const history = useNavigate();
 
@@ -63,24 +65,32 @@ const App: React.FC = () => {
     setQuery(`?offset=${offset}&limit=${limit}`)
   }, [currentPage])
 
-  console.log(query)
-  console.log(listLinks)
-
   // Пагинация: делаем запрос ссылок для конкретной страницы пагинации
   useEffect(() => {
     getStatisticsLimit(token, query)
-      .then(data => {setListLinks(data)})
+      .then(data => {
+        setListLinks(data)
+      })
       .catch(err => console.log(err));
   }, [query])
 
-
-
+  useEffect(() => {
+    console.log(listLinks)
+  }, [listLinks])
 
   return (
     <div className='app'>
       <Header loggedIn={loggedIn} />
       <Routes>
-        <Route path='/' element={<Main handleSqueeze={handleSqueeze} items={listLinks} pages={pages} handleChangePage={handleChangePage} currentPage={currentPage} />} />
+        <Route path='/' element={
+          <Main
+            handleSqueeze={handleSqueeze}
+            items={listLinks}
+            pages={pages}
+            handleChangePage={handleChangePage}
+            currentPage={currentPage}
+          />
+        }/>
         <Route path='/signup' element={<Register handleRegister={handleRegister} />} />
         <Route path='/signin' element={<Login handleLogin={handleLogin} />} />
         <Route path='*' element={<Navigate to="/signup" />} />
