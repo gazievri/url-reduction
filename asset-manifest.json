@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/url-reduction/static/css/main.07d1bd59.css",
+    "main.js": "/url-reduction/static/js/main.cead2cbf.js",
+    "index.html": "/url-reduction/index.html",
+    "main.07d1bd59.css.map": "/url-reduction/static/css/main.07d1bd59.css.map",
+    "main.cead2cbf.js.map": "/url-reduction/static/js/main.cead2cbf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.07d1bd59.css",
+    "static/js/main.cead2cbf.js"
+  ]
+}
