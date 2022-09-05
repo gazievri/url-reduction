@@ -34,6 +34,15 @@
   border: 1px solid grey;
 }
 
+.register__btn:hover {
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.register__btn:focus {
+  background-color: transparent;
+}
+
 .register__text {
   text-align: center;
   color: grey;
