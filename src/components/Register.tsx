@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface RegisterProps {
   handleRegister: (username: string, password: string) => void;
@@ -46,7 +47,7 @@ const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
       <button
         className='register__btn'
         type='submit'>Register</button>
-      <p className='register__text'>Already register? Sign in</p>
+      <p className='register__text'>Already register? <Link to="/signin">Sign in</Link></p>
     </form>
   )
 }

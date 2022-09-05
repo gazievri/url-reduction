@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface LoginProps {
   handleLogin: (username: string, password: string) => void;
@@ -42,7 +43,7 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
         onChange={handleChange}
         value={data.password} />
       <button className='register__btn'>Sign in</button>
-      <p className='register__text'>Don't register? Register</p>
+      <p className='register__text'>Don't register? <Link to="/signup">Register</Link></p>
     </form>
   )
 }
