@@ -10,18 +10,18 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     password: ''
   })
 
+  // Обработчик событий onChange
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
     setData((oldData) => ({ ...oldData, [name]: value }));
   }
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement>= (e) => {
+  // Обработчик нажатия на кнопку Login
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const { username, password } = data;
     handleLogin(username, password);
-
   }
-
 
   return (
     <form className='register' onSubmit={handleSubmit}>
@@ -32,7 +32,7 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
         type="text" name="username"
         required
         onChange={handleChange}
-        value={data.username}/>
+        value={data.username} />
       <input
         className='register__input'
         placeholder='Enter your password'

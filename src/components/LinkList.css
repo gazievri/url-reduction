@@ -1,0 +1,51 @@
+.link-list {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.td-s {
+  max-width: 250px;
+  word-break: break-all;
+}
+
+.td-s:hover {
+  cursor: pointer;
+  color: grey;
+}
+
+.td-l {
+  max-width: 700px;
+  word-break: break-all;
+}
+
+.sort-icon {
+  margin-right: 1rem;
+}
+
+.sort-icon:hover {
+  cursor: pointer;
+}
+
+.table-button {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  font-weight: bold;
+}
+
+.table-button:focus {
+  background-color: transparent;
+
+}
+
+.table-button:hover {
+  cursor: pointer;
+}
+
+.descending {
+  text-decoration: dotted;
+}
+
+.ascending {
+  text-decoration: underline;
+}
