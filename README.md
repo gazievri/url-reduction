@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# 🌐 URL Redaction
+Проект **URL Redaction** представляет собой одностраничное приложение, с помощью которого можно сохранять длинные интернет ссылки в более коротком виде.
+Проект выполнен в качестве тестового задания для компании [HEX TEAM](https://hex.team/).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Функционал проекта
+Пользователю доступен следующий функционал:
+- регистрация личного кабинета;
+- авторизация в личном кабинете;
+- создание и сохранение сокращенной ссылки;
+- отображение таблицы сокращенных ссылок; 
+- копирование сокращенной ссылки по клику на нее;
+- пагинация страниц;
+- сортировка таблицы при клике по заголовок таблицы в двух направлениях; 
+- основной функционал доступен только зарегистрированому пользователю;
+- запоминание текущего пользователя для перехода в личный кабинет без авторизации.
 
-## Available Scripts
+Наглядно c функционалом проекта можно познакомиться в [видео](https://youtu.be/5sdQOOtksI0).
 
-In the project directory, you can run:
 
-### `npm start`
+<img width="1512" alt="Screenshot 2022-09-05 at 14 13 05" src="https://user-images.githubusercontent.com/96244317/188436124-52d32a7e-b8c1-4caf-9ae1-0914723b93a0.png">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Технологический стек
+При создании проекта использовался следующий стек технологий: HTML, CSS, JS, React.js, ReactHooks, TypeScript, функциональные компоненты React, REST-API.
+Проект создан с использованием библиотеки [Materialize](https://materializecss.com/) и [FastAPI](http://79.143.31.216/docs).  
 
-### `npm test`
+## Работа с проектом
+Для запуска проекта, пожалуйста, выполните следующие действия:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Склонировать проект на ваш компьютер с [Github](https://github.com/gazievri/url-redaction.git) с помощью команды:
+```
+git clone https://github.com/gazievri/url-redaction.git
+```
+2. Установить зависимости:
+```
+npm install
+```
+3. Запустить проект:
+```
+npm start
+```
 
-### `npm run build`
+## Ссылки на проект
+Исходный код проекта доступен по [ссылке](https://github.com/gazievri/url-redaction).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Описание тестового задания доступно по [ссылке](https://docs.google.com/document/d/1r4UWiWHHPLoxmdCWaE_xO-RaaT3yOxzRnccX0KOQOPI/edit?usp=sharing).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Документация [FastAPI](http://79.143.31.216/docs).
