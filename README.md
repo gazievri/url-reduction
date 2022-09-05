@@ -3,6 +3,8 @@
 
 Проект выполнен в качестве тестового задания для компании [HEX TEAM](https://hex.team/).
 
+Проект доступн по [ссылке](https://gazievri.github.io/url-reduction/).
+
 ## Функционал проекта
 Пользователю доступен следующий функционал:
 - регистрация личного кабинета;
@@ -43,6 +45,8 @@ npm start
 ```
 
 ## Ссылки проекта
+Проект доступн по [ссылке](https://gazievri.github.io/url-reduction/).
+
 Исходный код проекта доступен по [ссылке](https://github.com/gazievri/url-redaction).
 
 Описание тестового задания доступно по [ссылке](https://docs.google.com/document/d/1r4UWiWHHPLoxmdCWaE_xO-RaaT3yOxzRnccX0KOQOPI/edit?usp=sharing).
