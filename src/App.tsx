@@ -19,7 +19,6 @@ const App: React.FC = () => {
   const limit: number = 10;
   const [query, setQuery] = useState(`?offset=0&limit=${limit}`);
   const [user, setUser] = useState('');
-
   const history = useNavigate();
 
   // Проверка наличия токена при обновлении страницы и передаресация пользователя

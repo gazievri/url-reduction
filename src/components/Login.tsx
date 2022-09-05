@@ -10,16 +10,17 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     password: ''
   })
 
+  // Обработчик событий onChange
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
     setData((oldData) => ({ ...oldData, [name]: value }));
   }
 
+  // Обработчик нажатия на кнопку Login
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const { username, password } = data;
     handleLogin(username, password);
-
   }
 
   return (

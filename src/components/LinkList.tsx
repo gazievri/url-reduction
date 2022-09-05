@@ -35,7 +35,7 @@ const LinkList: React.FC<Props> = ({ items }) => {
     setSortedConfig({ key, direction });
 
     if (sortedConfig) {
-        if (sortedConfig.key === key && sortedConfig.direction === 'ascending') {
+      if (sortedConfig.key === key && sortedConfig.direction === 'ascending') {
         direction = 'descending';
       };
     };
@@ -43,6 +43,7 @@ const LinkList: React.FC<Props> = ({ items }) => {
     setSortedConfig({ key, direction });
   }
 
+  // Функция получения класса дл стилизации в зависимости от порядка сортировки
   const getClassNamesFor = (name: string) => {
     if (!sortedConfig) {
       return;
@@ -54,9 +55,27 @@ const LinkList: React.FC<Props> = ({ items }) => {
     <table className='striped'>
       <thead>
         <tr>
-          <th><button className={`table-button ${getClassNamesFor('short')}`} onClick={() => requestSort('short')}>Short Link</button></th>
-          <th><button className={`table-button ${getClassNamesFor('target')}`} onClick={() => requestSort('target')}>Long Link</button></th>
-          <th className='center'><button className={`table-button ${getClassNamesFor('counter')}`} onClick={() => requestSort('counter')}>Transition</button></th>
+          <th>
+            <button
+              className={`table-button ${getClassNamesFor('short')}`}
+              onClick={() => requestSort('short')}>
+              Short Link
+            </button>
+          </th>
+          <th>
+            <button
+              className={`table-button ${getClassNamesFor('target')}`}
+              onClick={() => requestSort('target')}>
+              Long Link
+            </button>
+          </th>
+          <th className='center'>
+            <button
+              className={`table-button ${getClassNamesFor('counter')}`}
+              onClick={() => requestSort('counter')}>
+              Transition
+            </button>
+          </th>
         </tr>
       </thead>
       <tbody>

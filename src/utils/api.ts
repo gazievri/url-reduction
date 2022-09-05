@@ -1,5 +1,6 @@
 import { BASE_URL } from "./constants";
 
+// Запрос на регистрацию пользователя
 export const register = (username: string, password: string) => {
   return fetch(
     `${BASE_URL}/register?username=${username}&password=${password}`,
@@ -12,6 +13,7 @@ export const register = (username: string, password: string) => {
   ).then(checkResponse);
 };
 
+// Запрос на авторизацию пользователя
 export const login = (username: string, password: string) => {
   return fetch(`${BASE_URL}/login`, {
     body: `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`,
@@ -23,6 +25,7 @@ export const login = (username: string, password: string) => {
   }).then(checkResponse);
 };
 
+// Запрос на создание сокращенной ссылки
 export const squeeze = (link: string, token: string) => {
   return fetch(`${BASE_URL}/squeeze?link=${link}`, {
     method: "POST",
@@ -34,6 +37,7 @@ export const squeeze = (link: string, token: string) => {
   }).then(checkResponse);
 };
 
+// Запрос на получение списка созданных пользователем коротких ссылок
 export const getStatistics = (token: string, query: string) => {
   return fetch(`${BASE_URL}/statistics${query}`, {
     method: "GET",
@@ -45,6 +49,7 @@ export const getStatistics = (token: string, query: string) => {
   }).then(checkResponse);
 };
 
+// Функция проверки ответа от сервера
 export function checkResponse(response: {
   ok: any;
   json: () => any;
