@@ -34,18 +34,7 @@ export const squeeze = (link: string, token: string) => {
   }).then(checkResponse);
 };
 
-export const getStatistics = (token: string) => {
-  return fetch(`${BASE_URL}/statistics`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `bearer ${token}`,
-    },
-  }).then(checkResponse);
-};
-
-export const getStatisticsLimit = (token: string, query: string) => {
+export const getStatistics = (token: string, query: string) => {
   return fetch(`${BASE_URL}/statistics${query}`, {
     method: "GET",
     headers: {

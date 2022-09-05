@@ -5,7 +5,7 @@ import { Register } from './components/Register';
 import { Main } from './components/Main';
 import { Login } from './components/Login';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { register, login, squeeze, getStatistics, getStatisticsLimit } from './utils/api';
+import { register, login, squeeze, getStatistics } from './utils/api';
 import { Link } from './types/Link';
 import { PrivateRoutes } from './utils/PrivateRoutes';
 
@@ -20,8 +20,19 @@ const App: React.FC = () => {
   const [query, setQuery] = useState(`?offset=0&limit=${limit}`);
   const [user, setUser] = useState('');
 
-
   const history = useNavigate();
+
+  // Проверка наличия токена при обновлении страницы и передаресация пользователя
+  const tokenCheck = () => {
+    let userToken = localStorage.getItem('token');
+    let userName = localStorage.getItem('name');
+    if (userToken && userName) {
+      setLoggedIn(true);
+      setToken(userToken);
+      setUser(userName);
+      history('/');
+    }
+  }
 
   // Регистрация нового пользователя
   const handleRegister = (username: string, password: string) => {
@@ -38,36 +49,48 @@ const App: React.FC = () => {
   const handleLogin = (username: string, password: string) => {
     login(username, password)
       .then(data => {
-        console.log('Login', data);
         setLoggedIn(true);
         setUser(username)
         setToken(data.access_token);
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('name', username);
         history('/');
       })
-      .catch(err => console.log(err))
+      .catch(err => { console.log(err); alert('Login or password do not match. Please, check.') })
   }
 
+  // Выход из учетной записи пользователя
   const handleLogout = () => {
     setToken('');
+    localStorage.removeItem('token');
     setLoggedIn(false);
     history('/signin');
   }
 
+  // Обработка новой ссылки
   const handleSqueeze = (link: string) => {
     squeeze(link, token)
-      .then(data => setListLinks([...listLinks, data]));
+      .then(data => setListLinks([data, ...listLinks]));
   }
 
+  // Обработчки установки текущеуй позиции для пагинации и отображения контента
   const handleChangePage = (page: number) => {
     setCurrentPage(page);
   }
 
+  // При загрузке старницы с помощью функции tokenCheck проверяем наличие токена в LocalStorage
+  useEffect(() => {
+    tokenCheck()
+  }, []);
+
   // Пагинация: делаем запрос для определния количества страниц
   useEffect(() => {
-    getStatistics(token)
-      .then(data => setPages(Math.ceil(data.length / limit)))
-      .catch(err => console.log(err));
-  }, [])
+    if (loggedIn) {
+      getStatistics(token, '?offset0&limit=0')
+        .then(data => setPages(Math.ceil(data.length / limit)))
+        .catch(err => console.log(err));
+    }
+  }, [loggedIn, token])
 
   // Пагинация: создаем строку запроса для загрузки ссылок для страницы пагинации
   useEffect(() => {
@@ -77,12 +100,14 @@ const App: React.FC = () => {
 
   // Пагинация: делаем запрос ссылок для конкретной страницы пагинации
   useEffect(() => {
-    getStatisticsLimit(token, query)
-      .then(data => {
-        setListLinks(data)
-      })
-      .catch(err => console.log(err));
-  }, [query])
+    if (loggedIn) {
+      getStatistics(token, query)
+        .then(data => {
+          setListLinks(data)
+        })
+        .catch(err => console.log(err));
+    }
+  }, [query, loggedIn, token])
 
   return (
     <div className='app'>
